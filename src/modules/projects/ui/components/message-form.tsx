@@ -116,7 +116,6 @@ export const MessageForm = ({ projectId }: Props) => {
           </Button>
         </div>
       </form>
-      Message form
     </Form>
   );
 };
