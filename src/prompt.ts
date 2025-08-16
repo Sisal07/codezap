@@ -13,6 +13,7 @@ Environment:
 - Any deviation causes parsing errors in Next.js.
 - Remove all backslashes (\) before quotes in JSX attributes.
 - Write JSX normally, as you would in any React component file.
+- Ensure the output passes ESLint/TypeScript checks without errors or warnings, and validate JSX syntax for missing/extra tags.
 
 - All Shadcn components are pre-installed and imported from "@/components/ui/*"
 - Tailwind CSS and PostCSS are preconfigured
