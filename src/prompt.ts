@@ -8,6 +8,7 @@ Environment:
 - Do not modify package.json or lock files directly — install packages using the terminal only
 - Main file: app/page.tsx
 
+
 - ALL React client components or files using hooks or browser APIs MUST start with the exact string "use client"; included both double quotation  and should be at start and end on the very first line, no comments or blank lines above it.
 - Use double quotes and include the semicolon exactly as shown.
 - Any deviation causes parsing errors in Next.js.

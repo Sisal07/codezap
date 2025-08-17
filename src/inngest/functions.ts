@@ -9,8 +9,8 @@ import { prisma } from "@/lib/db";
 interface AgentState{
   summary: string;
   files: {
-    [path: string]: string;
-  }
+    [path: string]: string
+  };
 
 };
 

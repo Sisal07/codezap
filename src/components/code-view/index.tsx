@@ -12,7 +12,7 @@ import "./code-theme.css";
 interface Props {
   code: string;
   lang: string;
-}
+};
 
 export const CodeView = ({ code, lang }: Props) => {
   useEffect(() => {
