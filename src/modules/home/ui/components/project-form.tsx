@@ -131,21 +131,30 @@ export const ProjectForm = () => {
         </div>
       </form>
 
-      <div className="flex-wrap justify-center gap-2 hidden md:flex max-w-3xl ">
-        {PROJECT_TEMPLATES.map((template) => (
-            <Button
-            key={template.title}
-            variant="outline"
-            size="sm"
-            className="bg-white dark:bg-sidebar"
-            onClick={()=> onSelect(template.prompt)}
-            >
-                {template.emoji} {template.title}
+      <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
+  {PROJECT_TEMPLATES.map((template) => (
+    <button
+      key={template.title}
+      onClick={() => onSelect(template.prompt)}
+      className="
+        flex items-center gap-2 px-4 py-2
+        rounded-full
+        border border-gray-300 dark:border-gray-700
+        bg-white dark:bg-gray-800
+        text-gray-800 dark:text-gray-100
+        font-medium
+        shadow-sm
+        hover:shadow-lg hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-500 hover:text-white
+        transition-all duration-300
+        transform hover:-translate-y-1 hover:scale-105
+      "
+    >
+      <span className="text-lg">{template.emoji}</span>
+      <span className="whitespace-nowrap">{template.title}</span>
+    </button>
+  ))}
+</div>
 
-            </Button>
-        ))}
-
-      </div>
         </section>
     </Form>
   );

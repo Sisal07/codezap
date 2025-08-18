@@ -31,7 +31,7 @@ export const ProjectView = ({ projectId }: Props) => {
           <Suspense fallback={<p>LOADING PROJECT...</p>}>
             <ProjectHeader projectId={projectId} />
           </Suspense>
-          <Suspense fallback={<p>CODING...</p>}>
+          <Suspense fallback={<p> AI Assistant is working </p>}>
             <MessagesContainer
               projectId={projectId}
               activeFragment={activeFragment}
