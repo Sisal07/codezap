@@ -1,5 +1,57 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+/* In your globals.css */
+
+@tailwind utilities;
+
+/* Aurora Background Animation */
+@keyframes aurora {
+  from {
+    background-position: 50% 50%, 50% 50%;
+  }
+  to {
+    background-position: 350% 50%, 350% 50%;
+  }
+}
+
+.aurora-background {
+  position: fixed; /* Use fixed to ensure it covers the whole screen */
+  inset: 0;
+  z-index: -10; /* Place it behind all content */
+}
+
+.aurora-background::before {
+  content: "";
+  position: absolute;
+  inset: -100px;
+  background-image:
+    radial-gradient(
+      ellipse at top,
+      rgba(138, 43, 226, 0.2), /* A soft purple */
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at bottom,
+      rgba(0, 191, 255, 0.2),  /* A deep sky blue */
+      transparent 50%
+    );
+  animation: aurora 20s linear infinite;
+}
+
+/* Dark mode adjustments */
+.dark .aurora-background::before {
+    background-image:
+    radial-gradient(
+      ellipse at top,
+      rgba(138, 43, 226, 0.3),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at bottom,
+      rgba(0, 191, 255, 0.3),
+      transparent 60%
+    );
+}
 
 @custom-variant dark (&:is(.dark *));
 
