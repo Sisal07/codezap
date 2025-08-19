@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import { useRouter } from "next/navigation";
 import { PROJECT_TEMPLATES } from "../../constants";
+import { useClerk } from "@clerk/nextjs";
 
 
 
@@ -32,6 +33,8 @@ export const ProjectForm = () => {
 
     const router = useRouter();
   const trpc = useTRPC();
+  const clerk = useClerk();
+
   const queryClient = useQueryClient();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -51,8 +54,11 @@ export const ProjectForm = () => {
         //TODO invalidate usage status
       },
       onError: (error) => {
-        //TODO direct to pricing page if any error
         toast.error(error.message);
+
+        if (error.data?.code === "UNAUTHORIZED") {
+          clerk.openSignIn();
+        }
       },
     })
   );

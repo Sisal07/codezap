@@ -6,15 +6,19 @@ import { formatDistanceToNow } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
 import { useTRPC } from "@/trpc/client";
 import { motion } from "framer-motion";
+import { useUser } from "@clerk/nextjs";  
 
 export const ProjectsList = () => {
   const trpc = useTRPC();
+  const { user } = useUser();
   const { data: projects } = useQuery(trpc.projects.getMany.queryOptions());
+
+  if(!user) return null;
 
   return (
     <div className="w-full rounded-xl p-8 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-lg">
       <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-100">
-        Your Saved Zaps
+        {user?.firstName}&apos;s Zaps
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
