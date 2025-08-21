@@ -5,6 +5,7 @@ import { inngest } from "./client";
 import { getSandbox, lastAssistantTextMessageContent } from "./utils";
 import { z } from "zod"; // Added zod import for `z.object`
 import { prisma } from "@/lib/db";
+import { SANDBOX_ACTIVE_TIMEOUT } from "./types";
 
 interface AgentState{
   summary: string;
@@ -21,6 +22,7 @@ export const codeAgentFunction = inngest.createFunction(
   async ({ event, step }) => {
     const sandboxId = await step.run("get-sandbox-id", async () => {
       const sandbox = await Sandbox.create("codezap-nextjs-testcase-1");
+      await sandbox.setTimeout(SANDBOX_ACTIVE_TIMEOUT);
       return sandbox.sandboxId;
     });
 
@@ -31,8 +33,9 @@ export const codeAgentFunction = inngest.createFunction(
           projectId: event.data.projectId,
         },
         orderBy: {
-          createdAt: "asc", //try using desc if ai does not respond correctly
+          createdAt: "desc", //try using desc if ai does not respond correctly
         },
+        take: 5, // Limit to the last 5 messages
       });
 
       for (const message of messages){
@@ -43,7 +46,7 @@ export const codeAgentFunction = inngest.createFunction(
           content: message.content,
         });
       }
-      return formattedMessages;
+      return formattedMessages.reverse();
     });
 
 

@@ -13,6 +13,7 @@ import Link from "next/link";
 import { FileExplorer } from "@/components/file-explorer";
 import { UserControl } from "@/components/user-control";
 import { useAuth } from "@clerk/nextjs";
+import { ErrorBoundary } from "react-error-boundary";
 
 interface Props {
   projectId: string;
@@ -25,6 +26,47 @@ export const ProjectView = ({ projectId }: Props) => {
 
   const [activeFragment, setActiveFragment] = useState<Fragment | null>(null);
   const [tabState, setTabState] = useState<"preview" | "code">("preview");
+  const projectLoadingMessages = [
+  "Servers are sipping coffee… ☕",
+  "Compiling your dreams…",
+  "Loading bytes, not excuses",
+  "Project thinks, you wait",
+  "Hold on, nerds at work",
+  "Fetching bugs for fun",
+  "Optimizing your procrastination…",
+  "Loading… blame the intern",
+  "Initializing chaos module",
+  "Spinning up virtual chaos",
+  "Buffering your existential dread",
+  "Downloading patience, please wait",
+  "Project still alive… maybe",
+  "Summoning electrons… hang tight",
+  "Compiling regrets… almost done",
+  "The code is self-aware"
+];
+
+const aiAssistantMessages = [
+  "AI judging your code silently",
+  "Thinking… blame JavaScript",
+  "Hold up, brain rebooting",
+  "Processing your weird request",
+  "AI needs coffee too",
+  "Debugging your life choices",
+  "Error 404: Motivation missing",
+  "Calculating your stupidity factor",
+  "Generating sarcasm… done!",
+  "Running neural guilt trip",
+  "Your code smells funny",
+  "Please wait, chaos loading",
+  "Overthinking your logic errors",
+  "AI laughing at you internally",
+  "Analyzing human-level nonsense"
+];
+
+const randomMessage = (messages: string[]) => 
+  messages[Math.floor(Math.random() * messages.length)];
+
+
 
   return (
     <div className="h-screen">
@@ -34,16 +76,30 @@ export const ProjectView = ({ projectId }: Props) => {
           minSize={20}
           className="flex flex-col min-h-0"
         >
-          <Suspense fallback={<p>LOADING PROJECT...</p>}>
-            <ProjectHeader projectId={projectId} />
-          </Suspense>
-          <Suspense fallback={<p> AI Assistant is working </p>}>
-            <MessagesContainer
-              projectId={projectId}
-              activeFragment={activeFragment}
-              setActiveFragment={setActiveFragment}
-            />
-          </Suspense>
+         <ErrorBoundary fallback={<p className="text-red-600 font-semibold text-center mt-4">{randomMessage(["Well, this is awkward…", "Project exploded 💥"])}</p>}>
+  <Suspense fallback={
+    <p className="text-blue-600 font-medium text-center mt-4 animate-pulse">
+      {randomMessage(projectLoadingMessages)}
+    </p>
+  }>
+    <ProjectHeader projectId={projectId} />
+  </Suspense>
+</ErrorBoundary>
+
+<ErrorBoundary fallback={<p className="text-red-600 font-semibold text-center mt-4">{randomMessage(["AI took a nap 💤", "Error… blame GitHub"])}</p>}>
+  <Suspense fallback={
+    <p className="text-green-600 font-medium text-center mt-4 animate-pulse">
+      {randomMessage(aiAssistantMessages)}
+    </p>
+  }>
+    <MessagesContainer
+      projectId={projectId}
+      activeFragment={activeFragment}
+      setActiveFragment={setActiveFragment}
+    />
+  </Suspense>
+</ErrorBoundary>
+
         </ResizablePanel>
 
         <ResizableHandle className="hover:bg-primary transition-colors" />
