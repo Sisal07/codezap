@@ -36,10 +36,11 @@ export const PROJECT_TEMPLATES = [
       "Build a store page with category filters, a product grid, and local cart logic to add and remove items. Focus on clear typography, spacing, and button states for a great e-commerce UI.",
   },
   {
-    emoji: "🏡",
-    title: "Build an Airbnb clone",
-    prompt:
-      "Build an Airbnb-style listings grid with mock data, filter sidebar, and a modal with property details using local state. Use card spacing, soft shadows, and clean layout for a welcoming design.",
+   emoji: "🐍",
+title: "Build a Snake Game",
+prompt:
+  "Build a classic Snake game using React and local state. Implement a grid-based board, a moving snake that grows when eating food, and basic game over conditions. Include keyboard controls (arrow keys) for movement, a score display, and simple Tailwind styling for the board and snake. Ensure the game resets properly after game over."
+
   },
   {
     emoji: "🎵",
