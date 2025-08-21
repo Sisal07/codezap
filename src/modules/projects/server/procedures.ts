@@ -14,6 +14,12 @@ export const projectsRouter = createTRPCRouter({
       })
     )
     .query(async ({ input, ctx }) => {
+
+
+      //throw new TRPCError({code: "BAD_REQUEST" });
+
+
+
       const existingProject = await prisma.project.findUnique({
         where: { id: input.id, userId: ctx.auth.userId },
       });
