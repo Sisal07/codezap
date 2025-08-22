@@ -18,11 +18,10 @@ export const PROJECT_TEMPLATES = [
       "Build a kanban board with drag-and-drop using react-beautiful-dnd and support for adding and removing tasks with local state. Use consistent spacing, column widths, and hover effects for a polished UI.",
   },
   {
-    emoji: "🗂️",
-    title: "Build a file manager",
-    prompt:
-      "Build a file manager with folder list, file grid, and options to rename or delete items using mock data and local state. Focus on spacing, clear icons, and visual distinction between folders and files.",
-  },
+  "emoji": "🔢",
+  "title": "Build a Number Guessing Game",
+  "prompt": "Build a number guessing game using React. Randomly select a number, let the user input guesses, display hints like 'too high' or 'too low', and show attempts count. Include a reset button. Style input, messages, and buttons using Tailwind CSS."
+},
   {
     emoji: "📺",
     title: "Build a YouTube clone",
